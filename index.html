@@ -62,7 +62,7 @@
 
         <div class="video-container">
           <iframe
-            src="https://www.youtube.com/embed/FT-iswZQqiY"
+            src="https://www.youtube.com/embed/CrMAy18VRg4?list=RDCrMAy18VRg4"
             allowfullscreen
           >
           </iframe>
@@ -127,7 +127,6 @@
       </div>
 
       <section class="cards">
-     
         <div class="card">
           <div class="card-closed">
             <span class="icon">?</span>
@@ -161,6 +160,65 @@
           <div class="card-open">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
             <button class="btn">Fechar</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="audio-section">
+        <div class="audio-text">
+          <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h1>
+          <p>
+            It is a long established fact that a reader will be distracted by
+            the readable content of a page when looking at its layout.
+          </p>
+        </div>
+
+        <div class="audio-container">
+          <div class="audio-player">
+            <button id="playBtn" type="button" aria-label="Reproduzir áudio">
+              <img id="playIcon" src="./assets/images/play.svg" alt="Play" />
+            </button>
+
+            <div class="progress-container" aria-label="Progresso do áudio">
+              <div class="progress"></div>
+              <div class="progress-thumb"></div>
+            </div>
+
+            <span id="time">0:00</span>
+
+            <div class="volume-control">
+              <button
+                id="volumeBtn"
+                type="button"
+                aria-label="Controlar volume"
+              >
+                <img
+                  id="volumeIcon"
+                  src="./assets/images/volume.svg"
+                  alt="Volume"
+                />
+              </button>
+
+              <div class="volume-slider" aria-label="Volume">
+                <div class="volume-level"></div>
+                <div class="volume-thumb"></div>
+              </div>
+              <button
+                class="settings-btn"
+                type="button"
+                aria-label="Configurações"
+              >
+                <img src="./assets/images/settings.svg" alt="Configurações" />
+              </button>
+            </div>
+
+            <audio id="audio">
+              <source
+                src="./assets/audio/46992__sub-d__emin-9-guitar-chord-interup.wav"
+                type="audio/mpeg"
+              />
+              Seu navegador não suporta áudio.
+            </audio>
           </div>
         </div>
       </section>
