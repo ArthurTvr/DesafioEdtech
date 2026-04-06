@@ -252,9 +252,8 @@ const STORAGE_KEY = "atividadeDiscursiva";
 function salvarEstadoDiscursiva() {
   const estado = {
     texto: textareaDiscursiva.value,
-    respondido: btnResponder.disabled && !btnAlterar.disabled,
+    respondido: textareaDiscursiva.disabled,
     feedbackVisivel: feedbackDiscursiva.classList.contains("ativo"),
-    textareaDesabilitado: textareaDiscursiva.disabled,
   };
 
   sessionStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
@@ -271,9 +270,7 @@ function atualizarBotoesIniciais() {
     } else {
       btnResponder.classList.remove("ativo");
     }
-  }
 
-  if (!feedbackDiscursiva.classList.contains("ativo")) {
     btnAlterar.disabled = true;
   }
 }
@@ -287,7 +284,6 @@ function responderAtividade() {
   btnResponder.classList.remove("ativo");
 
   btnAlterar.disabled = false;
-
   textareaDiscursiva.disabled = true;
 
   salvarEstadoDiscursiva();
@@ -295,7 +291,6 @@ function responderAtividade() {
 
 function alterarAtividade() {
   textareaDiscursiva.disabled = false;
-
   feedbackDiscursiva.classList.remove("ativo");
 
   btnAlterar.disabled = true;
@@ -325,25 +320,28 @@ function restaurarEstadoDiscursiva() {
   const estado = JSON.parse(salvo);
 
   textareaDiscursiva.value = estado.texto || "";
-  textareaDiscursiva.disabled = !!estado.textareaDesabilitado;
+  textareaDiscursiva.disabled = !!estado.respondido;
 
-  if (estado.feedbackVisivel) {
-    feedbackDiscursiva.classList.add("ativo");
+  if (estado.respondido) {
     btnResponder.disabled = true;
     btnResponder.classList.remove("ativo");
     btnAlterar.disabled = false;
   } else {
-    feedbackDiscursiva.classList.remove("ativo");
-    btnAlterar.disabled = true;
-
     const temTexto = textareaDiscursiva.value.trim() !== "";
     btnResponder.disabled = !temTexto;
+    btnAlterar.disabled = true;
 
     if (temTexto) {
       btnResponder.classList.add("ativo");
     } else {
       btnResponder.classList.remove("ativo");
     }
+  }
+
+  if (estado.feedbackVisivel) {
+    feedbackDiscursiva.classList.add("ativo");
+  } else {
+    feedbackDiscursiva.classList.remove("ativo");
   }
 }
 
@@ -359,10 +357,11 @@ btnAlterar.addEventListener("click", alterarAtividade);
 
 fecharFeedback.addEventListener("click", () => {
   feedbackDiscursiva.classList.remove("ativo");
-  btnAlterar.disabled = true;
-  atualizarBotoesIniciais();
   salvarEstadoDiscursiva();
 });
 
 restaurarEstadoDiscursiva();
-atualizarBotoesIniciais();
+
+if (!textareaDiscursiva.disabled) {
+  atualizarBotoesIniciais();
+}
