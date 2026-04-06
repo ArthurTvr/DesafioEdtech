@@ -12,6 +12,8 @@ const swiper = new Swiper(".mySwiper", {
   },
 });
 
+//cards
+
 const cards = document.querySelectorAll(".card");
 
 cards.forEach((card) => {
@@ -186,7 +188,6 @@ function setVolumeFromClientX(clientX) {
   updateVolumeUI();
 }
 
-// ===== PROGRESSO =====
 progressContainer.addEventListener("mousedown", (e) => {
   isDraggingProgress = true;
   setProgressFromClientX(e.clientX);
@@ -207,7 +208,6 @@ document.addEventListener("mouseup", () => {
   isDraggingVolume = false;
 });
 
-// ===== TOUCH PROGRESSO =====
 progressContainer.addEventListener("touchstart", (e) => {
   isDraggingProgress = true;
   setProgressFromClientX(e.touches[0].clientX);
@@ -228,7 +228,6 @@ document.addEventListener("touchend", () => {
   isDraggingVolume = false;
 });
 
-// ===== VOLUME =====
 volumeSlider.addEventListener("mousedown", (e) => {
   isDraggingVolume = true;
   setVolumeFromClientX(e.clientX);
@@ -238,3 +237,132 @@ volumeSlider.addEventListener("touchstart", (e) => {
   isDraggingVolume = true;
   setVolumeFromClientX(e.touches[0].clientX);
 });
+
+
+
+// resposta discursiva
+const textareaDiscursiva = document.getElementById("textarea-discursiva");
+const btnResponder = document.getElementById("btnResponder");
+const btnAlterar = document.getElementById("btnAlterar");
+const feedbackDiscursiva = document.getElementById("feedbackDiscursiva");
+const fecharFeedback = document.getElementById("fecharFeedback");
+
+const STORAGE_KEY = "atividadeDiscursiva";
+
+function salvarEstadoDiscursiva() {
+  const estado = {
+    texto: textareaDiscursiva.value,
+    respondido: btnResponder.disabled && !btnAlterar.disabled,
+    feedbackVisivel: feedbackDiscursiva.classList.contains("ativo"),
+    textareaDesabilitado: textareaDiscursiva.disabled,
+  };
+
+  sessionStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+}
+
+function atualizarBotoesIniciais() {
+  const temTexto = textareaDiscursiva.value.trim() !== "";
+
+  if (!textareaDiscursiva.disabled) {
+    btnResponder.disabled = !temTexto;
+
+    if (temTexto) {
+      btnResponder.classList.add("ativo");
+    } else {
+      btnResponder.classList.remove("ativo");
+    }
+  }
+
+  if (!feedbackDiscursiva.classList.contains("ativo")) {
+    btnAlterar.disabled = true;
+  }
+}
+
+function responderAtividade() {
+  if (textareaDiscursiva.value.trim() === "") return;
+
+  feedbackDiscursiva.classList.add("ativo");
+
+  btnResponder.disabled = true;
+  btnResponder.classList.remove("ativo");
+
+  btnAlterar.disabled = false;
+
+  textareaDiscursiva.disabled = true;
+
+  salvarEstadoDiscursiva();
+}
+
+function alterarAtividade() {
+  textareaDiscursiva.disabled = false;
+
+  feedbackDiscursiva.classList.remove("ativo");
+
+  btnAlterar.disabled = true;
+
+  const temTexto = textareaDiscursiva.value.trim() !== "";
+  btnResponder.disabled = !temTexto;
+
+  if (temTexto) {
+    btnResponder.classList.add("ativo");
+  } else {
+    btnResponder.classList.remove("ativo");
+  }
+
+  salvarEstadoDiscursiva();
+}
+
+function restaurarEstadoDiscursiva() {
+  const salvo = sessionStorage.getItem(STORAGE_KEY);
+
+  if (!salvo) {
+    btnResponder.disabled = true;
+    btnAlterar.disabled = true;
+    btnResponder.classList.remove("ativo");
+    return;
+  }
+
+  const estado = JSON.parse(salvo);
+
+  textareaDiscursiva.value = estado.texto || "";
+  textareaDiscursiva.disabled = !!estado.textareaDesabilitado;
+
+  if (estado.feedbackVisivel) {
+    feedbackDiscursiva.classList.add("ativo");
+    btnResponder.disabled = true;
+    btnResponder.classList.remove("ativo");
+    btnAlterar.disabled = false;
+  } else {
+    feedbackDiscursiva.classList.remove("ativo");
+    btnAlterar.disabled = true;
+
+    const temTexto = textareaDiscursiva.value.trim() !== "";
+    btnResponder.disabled = !temTexto;
+
+    if (temTexto) {
+      btnResponder.classList.add("ativo");
+    } else {
+      btnResponder.classList.remove("ativo");
+    }
+  }
+}
+
+textareaDiscursiva.addEventListener("input", () => {
+  if (!textareaDiscursiva.disabled) {
+    atualizarBotoesIniciais();
+    salvarEstadoDiscursiva();
+  }
+});
+
+btnResponder.addEventListener("click", responderAtividade);
+btnAlterar.addEventListener("click", alterarAtividade);
+
+fecharFeedback.addEventListener("click", () => {
+  feedbackDiscursiva.classList.remove("ativo");
+  btnAlterar.disabled = true;
+  atualizarBotoesIniciais();
+  salvarEstadoDiscursiva();
+});
+
+restaurarEstadoDiscursiva();
+atualizarBotoesIniciais();
