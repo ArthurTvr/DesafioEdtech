@@ -291,10 +291,17 @@ body {
   opacity: 1;
   background: #e5e7eb;
 }
-
+.swiper-pagination-bullet:hover {
+  background: #76b900 !important;
+  opacity: 1 !important;
+}
 .swiper-pagination-bullet-active {
   background: #171d0c !important;
   transform: none;
+}
+.swiper-pagination-bullet-active:hover {
+  background: #171d0c !important;
+  opacity: 1 !important;
 }
 
 .texts-bottom-cards {
