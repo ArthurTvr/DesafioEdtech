@@ -93,7 +93,7 @@ body {
 .cta-button:hover {
   opacity: 0.8;
 }
-/* RESPONSIVO */
+
 
 .description {
   margin-top: 20px;
@@ -164,7 +164,7 @@ body {
   width: 100%;
   max-width: 1024px;
   gap: 20px;
-  height: auto; /* REMOVE altura fixa */
+  height: auto; 
 }
 #card-texts {
   font-size: 16px;
@@ -175,13 +175,15 @@ body {
 
 #card-texts p {
   margin-bottom: 20px;
-  width: 100%;
+  width: 65%;
 }
 .img-card {
   width: 100%;
   max-width: 400px;
   border-radius: 8px;
 }
+
+
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
@@ -218,5 +220,8 @@ body {
 
   #card-texts {
     text-align: center;
+  }
+  #card-texts p {
+    width: 100%;
   }
 }
