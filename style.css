@@ -714,11 +714,11 @@ body {
   background: #e7f1e7;
   background-color: #dcfce7;
 }
-#fecharFeedbackDiscursiva{
+#fecharFeedbackDiscursiva {
   color: #166534;
 }
-#fecharFeedbackObjetiva{
-  color: #854D0E;
+#fecharFeedbackObjetiva {
+  color: #854d0e;
 }
 .feedback-discursiva.ativo {
   display: flex;
@@ -865,7 +865,7 @@ body {
   gap: 16px;
   padding: 18px 20px;
   border-radius: 6px;
-  background: #FFF9C4;
+  background: #fff9c4;
 }
 
 .feedback-objetiva.ativo {
@@ -874,13 +874,13 @@ body {
 
 .feedback-objetiva-content strong {
   display: block;
-  color: #713F12;
+  color: #713f12;
   font-size: 18px;
   margin-bottom: 10px;
 }
 
 .feedback-objetiva-content p {
-  color: #713F12;
+  color: #713f12;
   font-size: 15px;
   line-height: 1.7;
 }
@@ -934,7 +934,9 @@ body {
   justify-content: space-between;
   gap: 16px;
   background: #ffffff;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 .faq-item summary::-webkit-details-marker {
@@ -1003,7 +1005,7 @@ body {
   padding: 0 24px 24px 24px;
 }
 
-.footer{
+.footer {
   display: flex;
   justify-content: space-around;
   padding: 40px 20px;
@@ -1011,14 +1013,14 @@ body {
   background-color: #0c0a08;
 }
 .footer-container {
-    color: #64748B;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 1024px;
-    font-size: 12px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1024px;
+  font-size: 12px;
 }
 
 @media (max-width: 768px) {
@@ -1126,7 +1128,7 @@ body {
     flex-direction: row;
     align-items: flex-start;
   }
-    .atividade-objetiva {
+  .atividade-objetiva {
     padding: 20px;
   }
 
@@ -1142,7 +1144,7 @@ body {
   .btn-objetiva {
     width: 100%;
   }
-    .faq-header h2 {
+  .faq-header h2 {
     font-size: 32px;
   }
 

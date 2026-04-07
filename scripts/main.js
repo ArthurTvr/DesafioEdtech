@@ -24,7 +24,7 @@ cards.forEach((card) => {
       const isActive = card.classList.contains("active");
 
       // fecha todos
-      cards.forEach(c => c.classList.remove("active"));
+      cards.forEach((c) => c.classList.remove("active"));
 
       // se não estava ativo, abre
       if (!isActive) {
@@ -57,7 +57,9 @@ audio.volume = 0.7;
 function formatTime(seconds) {
   if (!Number.isFinite(seconds)) return "00:00";
   const minutes = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+  const secs = Math.floor(seconds % 60)
+    .toString()
+    .padStart(2, "0");
   return `${minutes.toString().padStart(2, "0")}:${secs}`;
 }
 
@@ -238,8 +240,6 @@ volumeSlider.addEventListener("touchstart", (e) => {
   setVolumeFromClientX(e.touches[0].clientX);
 });
 
-
-
 // resposta discursiva
 const textareaDiscursiva = document.getElementById("textarea-discursiva");
 const btnResponder = document.getElementById("btnResponder");
@@ -366,15 +366,17 @@ if (!textareaDiscursiva.disabled) {
   atualizarBotoesIniciais();
 }
 
-
-
 //OBJETIVA
 
-const opcoesObjetiva = document.querySelectorAll('.opcao-objetiva input[type="checkbox"]');
+const opcoesObjetiva = document.querySelectorAll(
+  '.opcao-objetiva input[type="checkbox"]',
+);
 const btnResponderObjetiva = document.getElementById("btnResponderObjetiva");
 const btnAlterarObjetiva = document.getElementById("btnAlterarObjetiva");
 const feedbackObjetiva = document.getElementById("feedbackObjetiva");
-const fecharFeedbackObjetiva = document.getElementById("fecharFeedbackObjetiva");
+const fecharFeedbackObjetiva = document.getElementById(
+  "fecharFeedbackObjetiva",
+);
 
 const STORAGE_KEY_OBJETIVA = "atividadeObjetiva";
 
@@ -387,7 +389,9 @@ function atualizarVisualObjetiva() {
 
 function salvarEstadoObjetiva() {
   const estado = {
-    selecionados: [...opcoesObjetiva].filter((input) => input.checked).map((input) => input.id),
+    selecionados: [...opcoesObjetiva]
+      .filter((input) => input.checked)
+      .map((input) => input.id),
     respondido: btnResponderObjetiva.disabled && !btnAlterarObjetiva.disabled,
     feedbackVisivel: feedbackObjetiva.classList.contains("ativo"),
     bloqueada: opcoesObjetiva[0].disabled,
@@ -523,8 +527,7 @@ if (!opcoesObjetiva[0].disabled) {
   atualizarBotoesObjetiva();
 }
 
-
-
+//FAQ
 const faqItems = document.querySelectorAll(".faq-item");
 
 function atualizarSetasFaq() {
